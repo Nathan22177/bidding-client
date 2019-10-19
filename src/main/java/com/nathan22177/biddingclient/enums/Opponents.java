@@ -41,5 +41,15 @@ public enum Opponents {
     /***
      * Waits for an advantage then bids last winning bid plus one;
      * */
-    WIN_INC_BOT
+    WIN_INC_BOT,
+
+    /***
+     * Random strategy
+     * */
+    RANDOM_BOT,
+
+    /***
+    * Another user playing trough web interface
+    * */
+    MATCHMAKING
 }

@@ -46,6 +46,8 @@
                 scheduling bids and offers and interconnector flows across participating regions and power exchanges
                 within
                 Europe.</p>
+            <div class="col-sm-1 col-xs-1">
+            </div>
             <div class="col-sm-5 col-xs-5">
                 <h4 class="display-4">Rules of the game</h4>
                 <p>A product x QU (quantity units) will be auctioned under 2 parties. The parties have each y MU
@@ -99,8 +101,8 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:each="bot : ${bots}"
-                   th:href="${'play/' + bot.name}"
-                   th:text="${bot.title}"></a>
+                   th:href="${'play/' + bot.key}"
+                   th:text="${bot.value}"></a>
             </div>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-2">

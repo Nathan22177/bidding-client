@@ -1,14 +1,22 @@
 package com.nathan22177.biddingclient.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import static com.nathan22177.biddingclient.enums.Opponents.botOptions;
+import com.nathan22177.biddingclient.service.BiddingClientService;
 
 @Controller
 public class BiddingClientController {
+
+    private final
+    BiddingClientService service;
+
+    public BiddingClientController(BiddingClientService service) {
+        this.service = service;
+    }
 
     @GetMapping("/play/{opponent}")
     public String startGame(Model model, @PathVariable String opponent) {
@@ -19,8 +27,7 @@ public class BiddingClientController {
 
     @GetMapping("/menu")
     public String newGame(Model model) {
-        model.addAttribute("bots", botOptions);
-
+        model.addAttribute("bots", service.getKeyTitleMapOfAvailableOpponents());
         return "menu";
     }
 }

@@ -36,8 +36,8 @@ public class BiddingClientService {
     }
 
     public Map<String, String> getKeyTitleMapOfAvailableOpponents(){
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "getOpponentsMap");
-        String response = restTemplate.getForObject(builder.toString(), String.class);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/getOpponentsMap");
+        String response = restTemplate.getForObject(builder.toUriString(), String.class);
         TypeReference<HashMap<String,String>> typeReference = new TypeReference<HashMap<String,String>>() {};
         Map<String, String> keyTitleMapOfAvailableOpponents = new HashMap<>();
         try {

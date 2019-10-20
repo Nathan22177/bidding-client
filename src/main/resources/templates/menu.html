@@ -63,7 +63,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:each="bot : ${bots}"
-                   th:href="#{'day-ahead/play/' + bot.name}"
+                   th:href="${'day-ahead/play/' + bot.name}"
                    th:text="${bot.title}"></a>
             </div>
         </div>

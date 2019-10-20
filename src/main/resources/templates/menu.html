@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
     <title>Day-ahead auction simulator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Style buttons */
+        .btn {
+            background-color: DodgerBlue; /* Blue background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 12px 16px; /* Some padding */
+            font-size: 16px; /* Set a font size */
+            cursor: pointer; /* Mouse pointer on hover */
+        }
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+            color: #fff;
+            background-color: RoyalBlue;
+            border-color: RoyalBlue;
+        }
+    </style>
 </head>
 <body>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Day-ahead Auction</h1>
+    <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time frame for scheduling bids and offers and interconnector flows across participating regions and power exchanges within Europe.</p>
+
+    <h2 class="display-4">How it works</h2>
+    <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction Exchange Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00 that evening and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a Trading Day. The results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
+    <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes at 11:00 on the day the auction takes place.</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-4" style="width: 100px">
+            <button class="btn"><i class="fa fa-user"></i> vs. another player</button>
+        </div>
+        <div class="col-sm-4" style="width: 100px">
+            <button class="btn btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-robot"></i> vs. one of the bots
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:each="bot : ${bots}"
+                   th:href="#{'day-ahead/play/' + bot.name}"
+                   th:text="${bot.title}"></a>
+                <a class="dropdown-item" href="#"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/539bdd1ce4.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

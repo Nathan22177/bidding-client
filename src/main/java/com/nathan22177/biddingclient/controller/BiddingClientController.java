@@ -1,13 +1,13 @@
 package com.nathan22177.biddingclient.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("day-ahead")
+import static com.nathan22177.biddingclient.enums.Opponents.botOptions;
+
+@Controller
 public class BiddingClientController {
 
     @GetMapping("/play/{opponent}")
@@ -18,8 +18,8 @@ public class BiddingClientController {
     }
 
     @GetMapping("/menu")
-    public String newGame(Model model, @PathVariable String opponent) {
-
+    public String newGame(Model model) {
+        model.addAttribute("bots", botOptions);
 
         return "menu";
     }

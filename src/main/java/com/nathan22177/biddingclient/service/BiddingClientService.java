@@ -3,7 +3,6 @@ package com.nathan22177.biddingclient.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nathan22177.biddingclient.controller.BiddingClientController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,17 +50,26 @@ public class BiddingClientService {
 
     public Conditions startNewGame(String opponent) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/newGameAgainstTheBot").queryParam("opponent", opponent);
-        JSONObject response = restTemplate.getForObject(builder.toUriString(), JSONObject.class);
-        return new Conditions(response);
+        String response = restTemplate.getForObject(builder.toUriString(), String.class);
+        TypeReference<HashMap<String, Integer>> typeReference = new TypeReference<HashMap<String,Integer>>() {};
+        Map<String, Integer> conditions = new HashMap<>();
+        try {
+            conditions = objectMapper.readValue(response, typeReference);
+            log.debug("Successfully fetched list of opponents from the server.");
+        } catch (JsonProcessingException exception) {
+            log.error("Could not parse response from the server: " + exception);
+        }
+        return new Conditions(conditions);
     }
 
     private static class Conditions {
-        int initialCash;
-        int initialQuantity;
+        // used in thymeleaf
+        public int initialCash;
+        public int initialQuantity;
 
-        private Conditions(JSONObject jo) {
-            this.initialCash = jo.getInt("initialCash");
-            this.initialQuantity = jo.getInt("initialQuantity");
+        private Conditions(Map<String, Integer> conditions) {
+            this.initialCash = conditions.get("initialCash");
+            this.initialQuantity = conditions.get("initialQuantity");
         }
     }
 }

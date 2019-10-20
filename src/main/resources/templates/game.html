@@ -50,20 +50,9 @@
 
             </div>
             <div class="col-sm-5 col-xs-5">
-                <h2 class="display-4">How it works IRL</h2>
-                <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction
-                    Exchange
-                    Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00
-                    that
-                    evening
-                    and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a
-                    Trading
-                    Day. The
-                    results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
-                <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes
-                    at
-                    11:00 on
-                    the day the auction takes place.</p>
+                <h2 class="display-4">Inventory</h2>
+                <p th:text="${'Balance: ' + conditions.initialCash}"></p>
+                <p th:text="${'Acquired QU: ' + conditions.initialQuantity}"></p>
             </div>
         </div>
     </div>

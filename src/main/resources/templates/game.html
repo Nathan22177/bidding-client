@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
     <title>Day-ahead auction simulator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
+        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+            color: #fff;
+            background-color: RoyalBlue;
+            border-color: RoyalBlue;
+        }
+    </style>
 </head>
 <body>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <h1 class="display-3"><p th:text="${'Playing against ' + opponent}"></p></h1>
+            <div class="col-sm-1 col-xs-1">
+            </div>
+            <div class="col-sm-5 col-xs-5">
+                <h4 class="display-4">Conditions: </h4>
+                <p th:text="${'Initial cash: ' + conditions.initialCash}"></p>
+                <p th:text="${'Initial quantity: ' + conditions.initialQuantity}"></p>
 
+            </div>
+            <div class="col-sm-5 col-xs-5">
+                <h2 class="display-4">How it works IRL</h2>
+                <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction
+                    Exchange
+                    Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00
+                    that
+                    evening
+                    and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a
+                    Trading
+                    Day. The
+                    results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
+                <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes
+                    at
+                    11:00 on
+                    the day the auction takes place.</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

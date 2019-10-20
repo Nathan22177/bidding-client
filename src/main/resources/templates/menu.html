@@ -15,7 +15,8 @@
             background-color: DodgerBlue;
             border: none;
             color: white;
-            padding: 12px;
+            padding-top: 12px;
+            padding-bottom: 12px;
             font-size: 16px;
             cursor: pointer;
         }
@@ -49,25 +50,24 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-lg-3 col-md-2 col-sm-2">
         </div>
-        <div class="col-sm-4" style="width: 120px">
-            <button class="btn"> vs. another player &nbsp;&nbsp; <i class="fa fa-user"></i></button>
+        <div class="col-sm-4 col-xs-5">
+            <button class="btn"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
         </div>
-        <div class="col-sm-4" style="width: 100px">
+        <div class="col-sm-4 col-xs-5">
             <button class="btn btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">vs. one of
                 the
-                bots &nbsp;&nbsp; <i class="fas fa-robot"></i>
+                bots &nbsp;<i class="fas fa-robot"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:each="bot : ${bots}"
                    th:href="#{'day-ahead/play/' + bot.name}"
                    th:text="${bot.title}"></a>
-                <a class="dropdown-item" href="#"></a>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-lg-2 col-md-3 col-sm-2">
         </div>
     </div>
 </div>

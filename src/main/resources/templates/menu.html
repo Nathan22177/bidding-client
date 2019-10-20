@@ -11,20 +11,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        /* Style buttons */
         .btn {
-            background-color: DodgerBlue; /* Blue background */
-            border: none; /* Remove borders */
-            color: white; /* White text */
-            padding: 12px 16px; /* Some padding */
-            font-size: 16px; /* Set a font size */
-            cursor: pointer; /* Mouse pointer on hover */
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        /* Darker background on mouse-over */
+
         .btn:hover {
             background-color: RoyalBlue;
         }
-        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+
+        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
             color: #fff;
             background-color: RoyalBlue;
             border-color: RoyalBlue;
@@ -33,22 +33,32 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-    <h1 class="display-4">Day-ahead Auction</h1>
-    <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time frame for scheduling bids and offers and interconnector flows across participating regions and power exchanges within Europe.</p>
+    <h1 class="display-3">Day-ahead Auction</h1>
+    <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time frame for
+        scheduling bids and offers and interconnector flows across participating regions and power exchanges within
+        Europe.</p>
 
     <h2 class="display-4">How it works</h2>
-    <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction Exchange Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00 that evening and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a Trading Day. The results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
-    <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes at 11:00 on the day the auction takes place.</p>
+    <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction Exchange
+        Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00 that evening
+        and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a Trading Day. The
+        results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
+    <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes at 11:00 on
+        the day the auction takes place.</p>
+    <h4 class="display-4">Rules</h4>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
         </div>
-        <div class="col-sm-4" style="width: 100px">
-            <button class="btn"><i class="fa fa-user"></i> vs. another player</button>
+        <div class="col-sm-4" style="width: 120px">
+            <button class="btn"> vs. another player &nbsp;&nbsp; <i class="fa fa-user"></i></button>
         </div>
         <div class="col-sm-4" style="width: 100px">
-            <button class="btn btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-robot"></i> vs. one of the bots
+            <button class="btn btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">vs. one of
+                the
+                bots &nbsp;&nbsp; <i class="fas fa-robot"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:each="bot : ${bots}"
@@ -56,6 +66,8 @@
                    th:text="${bot.title}"></a>
                 <a class="dropdown-item" href="#"></a>
             </div>
+        </div>
+        <div class="col-sm-2">
         </div>
     </div>
 </div>

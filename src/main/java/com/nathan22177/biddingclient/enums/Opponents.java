@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 public enum Opponents {
     /***
+     * Random strategy
+     * */
+    RANDOM_BOT("RANDOM"),
+
+    /***
      * Another user playing trough web interface
      * */
     ANOTHER_PLAYER("Real human"),
@@ -50,12 +55,7 @@ public enum Opponents {
     /***
      * Waits for an advantage then bids last winning bid plus one;
      * */
-    WIN_INC_BOT("Chad"),
-
-    /***
-     * Random strategy
-     * */
-    RANDOM_BOT("RANDOM");
+    WIN_INC_BOT("Chad");
 
     public final String title;
     public final String name;

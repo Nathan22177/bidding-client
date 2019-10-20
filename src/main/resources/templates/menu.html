@@ -21,6 +21,10 @@
             cursor: pointer;
         }
 
+        p {
+            word-wrap: break-word;
+        }
+
         .btn:hover {
             background-color: RoyalBlue;
         }
@@ -33,20 +37,52 @@
     </style>
 </head>
 <body>
-<div class="jumbotron text-center">
-    <h1 class="display-3">Day-ahead Auction</h1>
-    <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time frame for
-        scheduling bids and offers and interconnector flows across participating regions and power exchanges within
-        Europe.</p>
-
-    <h2 class="display-4">How it works</h2>
-    <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction Exchange
-        Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00 that evening
-        and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a Trading Day. The
-        results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
-    <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes at 11:00 on
-        the day the auction takes place.</p>
-    <h4 class="display-4">Rules</h4>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <h1 class="display-3">Day-ahead Auction</h1>
+            <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time
+                frame for
+                scheduling bids and offers and interconnector flows across participating regions and power exchanges
+                within
+                Europe.</p>
+            <div class="col-sm-5 col-xs-5">
+                <h4 class="display-4">Rules of the game</h4>
+                <p>A product x QU (quantity units) will be auctioned under 2 parties. The parties have each y MU
+                    (monetary
+                    units)
+                    for auction. They offer then simultaneously an arbitrary number of its MU on the first 2 QU of the
+                    product.
+                    After that, the bids will be visible to both. The 2 QU of the product is awarded to who has offered
+                    the
+                    most MU;
+                    if both bid the same, then both get 1 QU. Both bidders must pay their amount - including the
+                    defeated. A
+                    bid of
+                    0 MU is allowed. Bidding on each 2 QU is repeated until the supply of x QU is fully auctioned. Each
+                    bidder aims
+                    to get a larger amount than its competitor. In an auction wins the party that is able to get more QU
+                    than the
+                    other. With a tie, the program that retains more MU wins.</p>
+            </div>
+            <div class="col-sm-5 col-xs-5">
+                <h2 class="display-4">How it works IRL</h2>
+                <p>The Day-Ahead Market is a daily auction that takes place at 11:00 each calendar day. In this auction
+                    Exchange
+                    Members may trade electricity in 24 one-hour Trading Periods for the timeframe starting at 23:00
+                    that
+                    evening
+                    and finishing at 23:00 the following day. This auction timeframe is commonly referred to as a
+                    Trading
+                    Day. The
+                    results of the day-ahead Market auction are published as soon as practicable from 11:42.</p>
+                <p>The Order Book for a Day-Ahead Market auction opens at 23:00, 19 days before the auction and closes
+                    at
+                    11:00 on
+                    the day the auction takes place.</p>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -63,7 +99,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:each="bot : ${bots}"
-                   th:href="${'day-ahead/play/' + bot.name}"
+                   th:href="${'play/' + bot.name}"
                    th:text="${bot.title}"></a>
             </div>
         </div>

@@ -5,14 +5,15 @@
     <title>Day-ahead auction simulator</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Nathan22177"/>
+    <meta name="referrer" content="no-referrer"/>
+    <meta name="referrer" content="never"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js">-->
+<!--    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">-->
     <style>
         .btn {
-            background-color: DodgerBlue;
             border: none;
             color: white;
             padding-top: 12px;
@@ -35,6 +36,49 @@
             border-color: RoyalBlue;
         }
     </style>
+
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <script type="text/javascript" th:inline="javascript">
+        contextPath = /*[[@{/}]]*/ '';
+    </script>
+    <script type="text/javascript" th:inline="javascript">
+        var contextPath = /*[[@{/}]]*/ '';
+        require(["jquery"], function ($) {
+            function sendAjaxRequestForServerStatus() {
+                $.get('checkIfServerIsUp', function (data) {
+                    if (data) {
+                        $("#options").show();
+                        var online = "<span style=\"color: green\">" + "online" + "</span>";
+                        $("#status").empty();
+                        $("#status").append(online)
+                        $("#refreshBtn").removeClass("btn-danger btn-success");
+                        $("#refreshBtn").addClass("btn-success");
+                    } else {
+                        $("#options").hide();
+                        var offline = "<span style=\"color: red\">" + "offline" + "</span>";
+                        $("#status").empty();
+                        $("#status").append(offline)
+                        $("#refreshBtn").removeClass("btn-danger btn-success");
+                        $("#refreshBtn").addClass("btn-danger");
+                    }
+                });
+            };
+
+            $(document).ready(function () {
+                sendAjaxRequestForServerStatus();
+                $("#refreshBtn").click(function () {
+                    sendAjaxRequestForServerStatus();
+                });
+            });
+        });
+    </script>
+
 </head>
 <body>
 <div class="jumbotron">
@@ -83,29 +127,37 @@
                     11:00 on
                     the day the auction takes place.</p>
             </div>
+            <h2 class="display-4">Server status: <span id="status"></span>
+                <button class="btn" id="refreshBtn"><i class="fas fa-sync"></i>
+                </button>
+            </h2>
+
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-2 col-sm-2">
-        </div>
-        <div class="col-sm-4 col-xs-5">
-            <button class="btn"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
-        </div>
-        <div class="col-sm-4 col-xs-5">
-            <button class="btn btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button"
-                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">vs. one of
-                the
-                bots &nbsp;<i class="fas fa-robot"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" th:each="bot : ${bots}"
-                   th:href="${'play/' + bot.key}"
-                   th:text="${bot.value}"></a>
+    <div id="options">
+        <div class="row">
+            <div class="col-lg-3 col-md-2 col-sm-2">
             </div>
-        </div>
-        <div class="col-lg-2 col-md-3 col-sm-2">
+            <div class="col-sm-4 col-xs-5">
+                <button class="btn btn-info"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
+            </div>
+            <div class="col-sm-4 col-xs-5">
+                <button class="btn btn-info btn-secondary dropdown-toggle btn-secondary dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">vs.
+                    one of
+                    the
+                    bots &nbsp;<i class="fas fa-robot"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:each="bot : ${bots}"
+                       th:href="${'play/' + bot.key}"
+                       th:text="${bot.value}"></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-2">
+            </div>
         </div>
     </div>
 </div>

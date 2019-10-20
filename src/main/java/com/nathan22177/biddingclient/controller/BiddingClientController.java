@@ -1,8 +1,7 @@
 package com.nathan22177.biddingclient.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +16,8 @@ public class BiddingClientController {
     @Autowired
     private final BiddingClientService  service;
 
-    private final Map<String, String> availableOpponents;
-
     public BiddingClientController(BiddingClientService service) {
         this.service = service;
-        this.availableOpponents = service.getKeyTitleMapOfAvailableOpponents();
     }
 
     @GetMapping("/play/{opponent}")
@@ -29,7 +25,7 @@ public class BiddingClientController {
         if (opponent.contains("RANDOM")) {
             opponent = getRandomOpponent();
         }
-        model.addAttribute("opponent", availableOpponents.get(opponent));
+        model.addAttribute("opponent", service.getKeyTitleMapOfAvailableOpponents().get(opponent));
         model.addAttribute("conditions", service.startNewGame(opponent));
         return "game";
     }
@@ -43,9 +39,19 @@ public class BiddingClientController {
                 .orElseThrow(() -> new RuntimeException("There are no bots available. Something is wrong."));
     }
 
+    @GetMapping("/checkIfServerIsUp")
+    private ResponseEntity checkIfServerIsUp(Model model) {
+        Boolean serverIsUp = service.isServerUp();
+        return ResponseEntity.ok(serverIsUp);
+    }
+
     @GetMapping("/menu")
     public String newGame(Model model) {
-        model.addAttribute("bots", availableOpponents);
+        Boolean serverIsUp = service.isServerUp();
+        model.addAttribute("serverIsUp", serverIsUp);
+        if (serverIsUp) {
+            model.addAttribute("bots", service.getKeyTitleMapOfAvailableOpponents());
+        }
         return "menu";
     }
 }

@@ -68,44 +68,64 @@
             background-color: RoyalBlue;
             border-color: RoyalBlue;
         }
+
+        .jumbotron {
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
 <div class="jumbotron">
     <div class="container">
+        <h1 class="display-3">Day-ahead Auction Simulator</h1>
+        <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time
+            frame for
+            scheduling bids and offers and interconnector flows across participating regions and power exchanges
+            within
+            Europe.</p>
         <div class="row">
-            <h1 class="display-3">Day-ahead Auction Simulator</h1>
-            <p class="lead">The Day-Ahead Market is a single pan-European energy trading platform in the ex-ante time
-                frame for
-                scheduling bids and offers and interconnector flows across participating regions and power exchanges
-                within
-                Europe.</p>
-            <div class="col-sm-1 col-xs-1">
-            </div>
-            <div class="col-sm-5 col-xs-5">
+            <div class="col-sm-7 col-xs-7">
                 <h4 class="display-4">Rules of the game</h4>
-                <p>A product <i>x</i> QU (quantity units) will be auctioned under 2 parties. The parties have each <i>y</i> MU
-                    (monetary
-                    units)
-                    for auction. They offer then simultaneously an arbitrary number of its MU on the first 2 QU of the
-                    product.
-                    After that, the bids will be visible to both. The 2 QU of the product is awarded to who has offered
-                    the
-                    most MU;
-                    if both bid the same, then both get 1 QU. Both bidders must pay their amount - including the
-                    defeated. A
-                    bid of
-                    0 MU is allowed. Bidding on each 2 QU is repeated until the supply of x QU is fully auctioned. Each
-                    bidder aims
-                    to get a larger amount than its competitor. In an auction wins the party that is able to get more QU
-                    than the
-                    other. With a tie, the program that retains more MU wins.</p>
+                <p>
+                <ul>
+                    <li>A product <i><b>x</b></i> QU (quantity units) will be auctioned under 2 parties. The parties
+                        have each <i><b>y</b></i> MU
+                        (monetary
+                        units)
+                        for auction.
+                    </li>
+                    <li> They offer then simultaneously an arbitrary number of its MU on the first 2 QU of the
+                        product.
+                    </li>
+                    <li>
+                        After that, the bids will be visible to both. The 2 QU of the product is awarded to who has
+                        offered
+                        the
+                        most MU;
+                        if both bid the same, then both get 1 QU. Both bidders must pay their amount - including the
+                        defeated.
+                    </li>
+                    <li>A
+                        bid of
+                        0 MU is allowed.
+                    </li>
+                    <li>Bidding on each 2 QU is repeated until the supply of x QU is fully auctioned. Each
+                        bidder aims
+                        to get a larger amount than its competitor. In an auction wins the party that is able to get
+                        more QU
+                        than the
+                        other.
+                    </li>
+                    <li> With a tie, the program that retains more MU wins.</li>
+                </ul>
+                </p>
             </div>
-            <div class="col-sm-5 col-xs-5">
+            <div class="col-sm-3 col-xs-3">
                 <h2 class="display-4">Play</h2>
                 <div>
                     <div>
-                        <button id="pvp" class="btn btn-info" style="width: 200px; display: none"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
+                        <button id="pvp" class="btn btn-info" style="width: 200px; display: none"> vs. another player
+                            &nbsp;<i class="fa fa-user"></i></button>
                     </div>
                     <p></p>
                     <div>
@@ -126,12 +146,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
             <h2 class="display-4">Server status: <span id="status"></span>
                 <button class="btn" id="refreshBtn"><i class="fas fa-sync"></i>
                 </button>
             </h2>
+            <i>* Server is required to be up in order to enable player vs. player</i>
         </div>
-        <i>* Server is required to be up in order to enable player vs. player</i>
     </div>
 </div>
 </div>

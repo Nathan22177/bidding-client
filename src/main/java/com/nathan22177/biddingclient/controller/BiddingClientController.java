@@ -25,13 +25,13 @@ public class BiddingClientController {
         if (opponent.contains("RANDOM")) {
             opponent = getRandomOpponent();
         }
-        model.addAttribute("opponent", service.getKeyTitleMapOfAvailableOpponents().get(opponent));
+        model.addAttribute("opponent", service.getMapOfAvailableOpponents().get(opponent));
         model.addAttribute("conditions", service.startNewGame(opponent));
         return "game";
     }
 
     private String getRandomOpponent() {
-        return service.getKeyTitleMapOfAvailableOpponents().keySet()
+        return service.getMapOfAvailableOpponents().keySet()
                 .stream()
                 .filter(key -> !key.equalsIgnoreCase("RANDOM"))
                 .collect(CollectorUtils.toShuffledStream())
@@ -49,9 +49,7 @@ public class BiddingClientController {
     public String newGame(Model model) {
         Boolean serverIsUp = service.isServerUp();
         model.addAttribute("serverIsUp", serverIsUp);
-        if (serverIsUp) {
-            model.addAttribute("bots", service.getKeyTitleMapOfAvailableOpponents());
-        }
+        model.addAttribute("bots", service.getMapOfAvailableOpponents());
         return "menu";
     }
 }

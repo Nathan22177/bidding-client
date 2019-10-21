@@ -20,14 +20,14 @@
             function sendAjaxRequestForServerStatus() {
                 $.get('checkIfServerIsUp', function (data) {
                     if (data) {
-                        $("#options").show();
+                        $("#pvp").show();
                         var online = "<span style=\"color: green\">" + "online" + "</span>";
                         $("#status").empty();
                         $("#status").append(online)
                         $("#refreshBtn").removeClass("btn-danger btn-success");
                         $("#refreshBtn").addClass("btn-success");
                     } else {
-                        $("#options").hide();
+                        $("#pvp").hide();
                         var offline = "<span style=\"color: red\">" + "offline" + "</span>";
                         $("#status").empty();
                         $("#status").append(offline)
@@ -103,9 +103,9 @@
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Play</h2>
-                <div id="options" style="display: none; align-items: center; justify-content: center;">
+                <div>
                     <div>
-                        <button class="btn btn-info" style="width: 200px"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
+                        <button id="pvp" class="btn btn-info" style="width: 200px; display: none"> vs. another player &nbsp;<i class="fa fa-user"></i></button>
                     </div>
                     <p></p>
                     <div>
@@ -118,10 +118,10 @@
                             the
                             bots &nbsp;<i class="fas fa-robot"></i>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" style="width: 200px" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" th:each="bot : ${bots}"
                                th:href="${'play/' + bot.key}"
-                               th:text="${bot.value}"></a>
+                               th:text="${bot.value.title}"></a>
                         </div>
                     </div>
                 </div>
@@ -131,12 +131,9 @@
                 </button>
             </h2>
         </div>
-
+        <i>* Server is required to be up in order to enable player vs. player</i>
     </div>
 </div>
-</div>
-<div class="container">
-
 </div>
 <script src="https://kit.fontawesome.com/539bdd1ce4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -3,6 +3,8 @@ package com.nathan22177.biddingclient.service;
 import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nathan22177.enums.Opponent;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,19 +40,8 @@ public class BiddingClientService {
         return new RestTemplate();
     }
 
-    public Map<String, String> getKeyTitleMapOfAvailableOpponents() {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/getOpponentsMap");
-        String response = restTemplate.getForObject(builder.toUriString(), String.class);
-        TypeReference<HashMap<String, String>> typeReference = new TypeReference<HashMap<String, String>>() {
-        };
-        Map<String, String> keyTitleMapOfAvailableOpponents = new HashMap<>();
-        try {
-            keyTitleMapOfAvailableOpponents = objectMapper.readValue(response, typeReference);
-            log.debug("Successfully fetched list of opponents from the server.");
-        } catch (JsonProcessingException exception) {
-            log.error("Could not parse response from the server: " + exception);
-        }
-        return keyTitleMapOfAvailableOpponents;
+    public Map<String, Opponent> getMapOfAvailableOpponents() {
+        return Opponent.botOptions.stream().collect(Collectors.toMap(Opponent::getName, Function.identity()));
     }
 
     public Conditions startNewGame(String opponent) {

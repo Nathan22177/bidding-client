@@ -10,40 +10,11 @@
     <meta name="referrer" content="never"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js">-->
-<!--    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">-->
-    <style>
-        .btn {
-            border: none;
-            color: white;
-            padding-top: 12px;
-            padding-bottom: 12px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        p {
-            word-wrap: break-word;
-        }
-
-        .btn:hover {
-            background-color: RoyalBlue;
-        }
-
-        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
-            color: #fff;
-            background-color: RoyalBlue;
-            border-color: RoyalBlue;
-        }
-    </style>
-
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
     <script type="text/javascript" th:inline="javascript">
         contextPath = /*[[@{/}]]*/ '';
     </script>
@@ -78,7 +49,30 @@
             });
         });
     </script>
+    <style>
+        .btn {
+            border: none;
+            color: white;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
+        p {
+            word-wrap: break-word;
+        }
+
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
+        .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+            color: #fff;
+            background-color: RoyalBlue;
+            border-color: RoyalBlue;
+        }
+    </style>
 </head>
 <body>
 <div class="jumbotron">

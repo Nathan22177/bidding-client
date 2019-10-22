@@ -1,6 +1,5 @@
 package com.nathan22177.biddingclient.service;
 
-import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -9,7 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;

@@ -46,7 +46,7 @@ public class BiddingClientController {
     }
 
     @GetMapping("/menu")
-    public String newGame(Model model) {
+    public String menu(Model model) {
         Boolean serverIsUp = service.isServerUp();
         model.addAttribute("serverIsUp", serverIsUp);
         model.addAttribute("bots", service.getMapOfAvailableOpponents());

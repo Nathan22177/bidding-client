@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -65,15 +67,10 @@ public class BiddingClientService {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/getServerStatus");
         Boolean serverIsUp;
         try {
-            String response = restTemplate.getForObject(builder.toUriString(), String.class);
-            TypeReference<Boolean> typeReference = new TypeReference<Boolean>() {};
-            serverIsUp = objectMapper.readValue(response, typeReference);
-            log.debug("The server is operational.");
+            ResponseEntity response = restTemplate.exchange(builder.toString(), HttpMethod.GET, null, String.class);
+            serverIsUp = response.getStatusCode().is2xxSuccessful();
         } catch (RestClientException exception) {
             log.error("The server is down: " + exception);
-            serverIsUp = Boolean.FALSE;
-        } catch (Exception exception) {
-            log.error("Could not parse response from the server: " + exception);
             serverIsUp = Boolean.FALSE;
         }
         return serverIsUp;

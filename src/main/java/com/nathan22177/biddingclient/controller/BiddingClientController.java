@@ -26,7 +26,7 @@ public class BiddingClientController {
             opponent = getRandomOpponent();
         }
         model.addAttribute("opponent", service.getAvailableOpponents().get(opponent));
-        model.addAttribute("conditions", service.newGameAgainstTheBot(opponent));
+        model.addAttribute("conditions", service.createNewGameAgainstTheBot(opponent));
         return "game";
     }
 

@@ -60,15 +60,4 @@ public class BiddingClientService {
         }
         return serverIsUp;
     }
-
-    private static class Conditions {
-        // used in thymeleaf
-        public int initialCash;
-        public int initialQuantity;
-
-        private Conditions(Map<String, Integer> conditions) {
-            this.initialCash = conditions.get("initialCash");
-            this.initialQuantity = conditions.get("initialQuantity");
-        }
-    }
 }

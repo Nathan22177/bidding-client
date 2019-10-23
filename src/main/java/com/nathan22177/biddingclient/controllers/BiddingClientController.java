@@ -30,7 +30,6 @@ public class BiddingClientController {
             opponent = getRandomOpponent();
         }
         model.addAttribute("opponent", service.getAvailableOpponents().get(opponent));
-
         Long gameId = service.createNewGameAgainstTheBot(opponent);
         model.addAttribute("gameId", gameId);
         return "redirect:/vs_bot/" + gameId;

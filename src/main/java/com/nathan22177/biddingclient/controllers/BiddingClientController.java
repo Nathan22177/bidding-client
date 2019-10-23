@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.nathan22177.biddingclient.service.BiddingClientService;
 import com.nathan22177.biddingclient.utils.CollectorUtils;
 import com.nathan22177.collection.BiddingRound;
+import com.nathan22177.enums.Status;
 import com.nathan22177.game.PlayerVersusBotGame;
 
 @Controller
@@ -39,10 +40,11 @@ public class BiddingClientController {
     public String loadVersusBotGame(Model model, @PathVariable Long gameId) {
         PlayerVersusBotGame game = service.loadVersusBotGame(gameId);
         model.addAttribute("game", game);
+        model.addAttribute("playerCanPlaceBids",game.getStatus() == Status.WAITING_FOR_BIDS);
         return "vs_bot_interface";
     }
 
-    @PostMapping("/vs_bot/{gameId}/{bet}")
+    @PostMapping("/vs_bot/{gameId}/{bid}")
     public BiddingRound placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
         return service.placeBidVersusBot(gameId, bid);
     }

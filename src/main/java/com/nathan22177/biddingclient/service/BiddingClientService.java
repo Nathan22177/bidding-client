@@ -22,7 +22,6 @@ import com.nathan22177.enums.Opponent;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.util.NewGameUtil;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -75,7 +74,7 @@ public class BiddingClientService {
 
     public BiddingRound placeBidVersusBot(Long gameId, Integer bid) {
         PlayerVersusBotGame game = repository.getOne(gameId);
-        game.playerPlacesBid(bid);
+        game.playerPlacesBidVersusBot(bid);
         return game.getBluePlayer().getBiddingHistory().peekLast();
     }
 
@@ -89,6 +88,8 @@ public class BiddingClientService {
         int roundsLeft;
         int acquired;
         int balance;
+        String status;
+        boolean active;
 
         private GamesDTO(PlayerVersusBotGame game) {
             this.id = game.getId();
@@ -96,6 +97,8 @@ public class BiddingClientService {
             this.roundsLeft = (game.getConditions().getQuantity() / 2) - game.getBluePlayer().getBiddingHistory().size();
             this.acquired = game.getBluePlayer().getAcquiredAmount();
             this.balance = game.getBluePlayer().getBalance();
+            this.status = game.getStatus().toString();
+            this.active = game.getStatus().isActive();
         }
     }
 }

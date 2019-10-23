@@ -1,7 +1,10 @@
 package com.nathan22177.biddingclient.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,7 +19,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nathan22177.bidder.BidderPlayer;
+import com.nathan22177.bidder.player.BidderPlayer;
 import com.nathan22177.enums.Opponent;
+import com.nathan22177.game.PlayerVersusBotGame;
+import com.nathan22177.util.NewGameUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,25 +45,21 @@ public class BiddingClientService {
         return new RestTemplate();
     }
 
-    public Map<String, Opponent> getMapOfAvailableOpponents() {
+
+
+    public Map<String, Opponent> getAvailableOpponents() {
         return Opponent.botOptions.stream().collect(Collectors.toMap(Opponent::getName, Function.identity()));
     }
 
-    public Conditions startNewGame(String opponent) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/newGameAgainstTheBot")
-                .queryParam("opponent", opponent);
-        String response = restTemplate.getForObject(builder.toUriString(), String.class);
-        TypeReference<HashMap<String, Integer>> typeReference = new TypeReference<HashMap<String, Integer>>() {
-        };
-        Map<String, Integer> conditions = new HashMap<>();
-        try {
-            conditions = objectMapper.readValue(response, typeReference);
-            log.debug("Successfully fetched list of opponents from the server.");
-        } catch (JsonProcessingException exception) {
-            log.error("Could not parse response from the server: " + exception);
-        }
+    public Conditions newGameAgainstTheBot(String opponent) {
+
         return new Conditions(conditions);
     }
+
+    public PlayerVersusBotGame startNewGameAgainstTheBot(BidderPlayer bluePlayer, Opponent opponent) {
+        return NewGameUtil.createNewGameAgainstTheBot(bluePlayer, opponent)
+    }
+
 
     public boolean isServerUp() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/getServerStatus");

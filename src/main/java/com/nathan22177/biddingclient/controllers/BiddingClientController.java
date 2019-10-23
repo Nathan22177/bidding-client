@@ -13,6 +13,7 @@ import com.nathan22177.biddingclient.utils.CollectorUtils;
 import com.nathan22177.collection.BiddingRound;
 import com.nathan22177.enums.Status;
 import com.nathan22177.game.PlayerVersusBotGame;
+import com.nathan22177.game.dto.StateDTO;
 
 @Controller
 public class BiddingClientController {
@@ -44,7 +45,7 @@ public class BiddingClientController {
     }
 
     @PostMapping("/vs_bot/{gameId}/{bid}")
-    public BiddingRound placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
+    public StateDTO placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
         return service.placeBidVersusBot(gameId, bid);
     }
 

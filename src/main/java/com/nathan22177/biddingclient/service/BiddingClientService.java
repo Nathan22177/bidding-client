@@ -53,7 +53,7 @@ public class BiddingClientService {
     }
 
     public Long createNewGameAgainstTheBot(String opponent) {
-        PlayerVersusBotGame game = NewGameUtil.createNewGameAgainstTheBot(new BidderPlayer(), Opponent.valueOf(opponent));
+        PlayerVersusBotGame game = NewGameUtil.createNewGameAgainstTheBot(Opponent.valueOf(opponent));
         repository.saveAndFlush(game);
         return game.getId();
     }
@@ -78,7 +78,7 @@ public class BiddingClientService {
     public StateDTO placeBidVersusBot(Long gameId, Integer bid) {
         PlayerVersusBotGame game = repository.getOne(gameId);
         game.playerPlacesBidVersusBot(bid);
-        return new StateDTO(game.getBluePlayer());
+        return new StateDTO(game);
     }
 
     public List<GamesDTO> getStartedGamesVersusBots() {

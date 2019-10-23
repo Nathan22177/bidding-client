@@ -21,7 +21,7 @@
     <script type="text/javascript" th:inline="javascript">
         require(['jquery'], function ($) {
             $(document).ready(function () {
-                var upperLimit = [[${conditions.initialCash}]];
+                var upperLimit = [[${game.bluePlayer.balance}]];
                 $(".mask").inputmask('numeric', {rightAlign: false, min: 0, max: upperLimit});
             });
         });
@@ -58,14 +58,14 @@
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Inventory</h2>
-                <p th:text="${'Balance: ' + conditions.initialCash}"></p>
-                <p th:text="${'Acquired QU: ' + conditions.initialQuantity}"></p>
+                <p th:text="${'Balance: ' + game.bluePlayer.balance}"></p>
+                <p th:text="${'Acquired QU: ' + game.bluePlayer.acquiredAmount}"></p>
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h4 class="display-4">Initial conditions: </h4>
-                <p th:text="${'Initial cash: ' + conditions.initialCash}"></p>
-                <p th:text="${'Initial quantity: ' + conditions.initialQuantity}"></p>
-                <p th:text="${'Opponent: ' + conditions.initialQuantity}"></p>
+                <p th:text="${'Initial cash: ' + game.conditions.cash}"></p>
+                <p th:text="${'Initial quantity: ' + game.conditions.quantity}"></p>
+                <p th:text="${'Opponent: ' + game.redPlayer.title}"></p>
             </div>
         </div>
         <br>

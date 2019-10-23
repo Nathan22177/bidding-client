@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.controller;
+package com.nathan22177.biddingclient.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nathan22177.biddingclient.service.BiddingClientService;
 import com.nathan22177.biddingclient.utils.CollectorUtils;
+import com.nathan22177.collection.BiddingRound;
+import com.nathan22177.game.PlayerVersusBotGame;
 
 @Controller
 public class BiddingClientController {
@@ -20,14 +23,28 @@ public class BiddingClientController {
         this.service = service;
     }
 
-    @GetMapping("/play/{opponent}")
-    public String startGame(Model model, @PathVariable String opponent) {
+    @GetMapping("/play_vs_bot/{opponent}")
+    public String startVersusBotGame(Model model, @PathVariable String opponent) {
         if (opponent.contains("RANDOM")) {
             opponent = getRandomOpponent();
         }
         model.addAttribute("opponent", service.getAvailableOpponents().get(opponent));
-        model.addAttribute("conditions", service.createNewGameAgainstTheBot(opponent));
-        return "game";
+
+        Long gameId = service.createNewGameAgainstTheBot(opponent);
+        model.addAttribute("gameId", gameId);
+        return "redirect:/vs_bot/" + gameId;
+    }
+
+    @GetMapping("/vs_bot/{gameId}")
+    public String loadVersusBotGame(Model model, @PathVariable Long gameId) {
+        PlayerVersusBotGame game = service.loadVersusBotGame(gameId);
+        model.addAttribute("game", game);
+        return "vs_bot_interface";
+    }
+
+    @PostMapping("/vs_bot/{gameId}/{bet}")
+    public BiddingRound placeBidVsBot(@PathVariable Long gameId, @PathVariable Integer bid) {
+        return service.placeBidVsBot(gameId, bid);
     }
 
     private String getRandomOpponent() {
@@ -39,7 +56,7 @@ public class BiddingClientController {
                 .orElseThrow(() -> new RuntimeException("There are no bots available. Something is wrong."));
     }
 
-    @GetMapping("/checkIfServerIsUp")
+    @GetMapping("/check_if_server_is_up")
     private ResponseEntity checkIfServerIsUp(Model model) {
         Boolean serverIsUp = service.isServerUp();
         return ResponseEntity.ok(serverIsUp);

@@ -18,7 +18,7 @@
     <script type="text/javascript" th:inline="javascript">
         require(["jquery"], function ($) {
             function sendAjaxRequestForServerStatus() {
-                $.get('checkIfServerIsUp', function (data) {
+                $.get('check_if_server_is_up', function (data) {
                     if (data) {
                         $("#pvp").show();
                         var online = "<span style=\"color: green\">" + "online" + "</span>";
@@ -140,7 +140,7 @@
                         </button>
                         <div class="dropdown-menu" style="width: 200px" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" th:each="bot : ${bots}"
-                               th:href="${'play/' + bot.key}"
+                               th:href="${'play_vs_bot/' + bot.key}"
                                th:text="${bot.value.title}"></a>
                         </div>
                     </div>

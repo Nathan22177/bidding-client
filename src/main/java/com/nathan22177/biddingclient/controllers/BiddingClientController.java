@@ -43,8 +43,8 @@ public class BiddingClientController {
     }
 
     @PostMapping("/vs_bot/{gameId}/{bet}")
-    public BiddingRound placeBidVsBot(@PathVariable Long gameId, @PathVariable Integer bid) {
-        return service.placeBidVsBot(gameId, bid);
+    public BiddingRound placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
+        return service.placeBidVersusBot(gameId, bid);
     }
 
     private String getRandomOpponent() {
@@ -67,6 +67,7 @@ public class BiddingClientController {
         Boolean serverIsUp = service.isServerUp();
         model.addAttribute("serverIsUp", serverIsUp);
         model.addAttribute("bots", service.getAvailableOpponents());
+        model.addAttribute("listOfGamesVersusBots", service.getStartedGamesVersusBots());
         return "menu";
     }
 }

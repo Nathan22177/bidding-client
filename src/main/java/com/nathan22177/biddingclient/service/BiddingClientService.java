@@ -40,8 +40,6 @@ public class BiddingClientService {
         return new RestTemplate();
     }
 
-
-
     public Map<String, Opponent> getAvailableOpponents() {
         return Opponent.botOptions.stream().collect(Collectors.toMap(Opponent::getName, Function.identity()));
     }

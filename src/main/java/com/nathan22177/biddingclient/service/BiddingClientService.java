@@ -1,5 +1,6 @@
 package com.nathan22177.biddingclient.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,6 +21,8 @@ import com.nathan22177.biddingclient.repository.VersusBotRepository;
 import com.nathan22177.collection.BiddingRound;
 import com.nathan22177.enums.Opponent;
 import com.nathan22177.game.PlayerVersusBotGame;
+import com.nathan22177.game.dto.GamesDTO;
+import com.nathan22177.game.dto.StateDTO;
 import com.nathan22177.util.NewGameUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +62,7 @@ public class BiddingClientService {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/getServerStatus");
         Boolean serverIsUp;
         try {
-            ResponseEntity response = restTemplate.exchange(builder.toString(), HttpMethod.GET, null, String.class);
+            ResponseEntity response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null, String.class);
             serverIsUp = response.getStatusCode().is2xxSuccessful();
         } catch (RestClientException exception) {
             log.error("The server is down: " + exception);
@@ -72,33 +75,13 @@ public class BiddingClientService {
         return repository.getOne(gameId);
     }
 
-    public BiddingRound placeBidVersusBot(Long gameId, Integer bid) {
+    public StateDTO placeBidVersusBot(Long gameId, Integer bid) {
         PlayerVersusBotGame game = repository.getOne(gameId);
         game.playerPlacesBidVersusBot(bid);
-        return game.getBluePlayer().getBiddingHistory().peekLast();
+        return new StateDTO(game.getBluePlayer());
     }
 
-    public Object getStartedGamesVersusBots() {
+    public List<GamesDTO> getStartedGamesVersusBots() {
         return repository.findAll().stream().map(GamesDTO::new).collect(Collectors.toList());
-    }
-
-    private static class GamesDTO {
-        Long id;
-        String opponent;
-        int roundsLeft;
-        int acquired;
-        int balance;
-        String status;
-        boolean active;
-
-        private GamesDTO(PlayerVersusBotGame game) {
-            this.id = game.getId();
-            this.opponent = game.getRedPlayer().getTitle();
-            this.roundsLeft = (game.getConditions().getQuantity() / 2) - game.getBluePlayer().getBiddingHistory().size();
-            this.acquired = game.getBluePlayer().getAcquiredAmount();
-            this.balance = game.getBluePlayer().getBalance();
-            this.status = game.getStatus().toString();
-            this.active = game.getStatus().isActive();
-        }
     }
 }

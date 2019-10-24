@@ -38,7 +38,8 @@ public class BiddingClientController {
     @GetMapping("/vs_bot/{gameId}")
     public String loadVersusBotGame(Model model, @PathVariable Long gameId) {
         PlayerVersusBotGame game = service.loadVersusBotGame(gameId);
-        model.addAttribute("game", game);
+        model.addAttribute("red", game.getRedPlayer());
+        model.addAttribute("blue", game.getBluePlayer());
         model.addAttribute("playerCanPlaceBids",game.getStatus() == Status.WAITING_FOR_BIDS);
         return "vs_bot_interface";
     }

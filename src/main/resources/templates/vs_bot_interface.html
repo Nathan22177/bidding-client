@@ -21,7 +21,7 @@
     <script type="text/javascript" th:inline="javascript">
         require(['jquery'], function ($) {
             $(document).ready(function () {
-                var upperLimit = [[${game.bluePlayer.balance}]];
+                var upperLimit = [[${blue.balance}]];
                 $(".mask").inputmask('numeric', {rightAlign: false, min: 0, max: upperLimit});
             });
         });
@@ -53,19 +53,18 @@
 <div class="jumbotron">
     <div class="container">
         <div class="row">
-            <h1 class="display-3"><p th:text="${'Playing against ' + opponent.title}"></p></h1>
+            <h1 class="display-3"><p th:text="${'Playing against ' + red.title}"></p></h1>
             <div class="col-sm-1 col-xs-1">
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Inventory</h2>
-                <p th:text="${'Balance: ' + game.bluePlayer.balance}"></p>
-                <p th:text="${'Acquired QU: ' + game.bluePlayer.acquiredAmount}"></p>
+                <p th:text="${'Balance: ' + blue.balance}"></p>
+                <p th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h4 class="display-4">Initial conditions: </h4>
-                <p th:text="${'Initial cash: ' + game.conditions.cash}"></p>
-                <p th:text="${'Initial quantity: ' + game.conditions.quantity}"></p>
-                <p th:text="${'Opponent: ' + game.redPlayer.title}"></p>
+                <p th:text="${'Initial cash: ' + blue.conditions.cash}"></p>
+                <p th:text="${'Initial quantity: ' + blue.conditions.quantity}"></p>
             </div>
         </div>
         <br>

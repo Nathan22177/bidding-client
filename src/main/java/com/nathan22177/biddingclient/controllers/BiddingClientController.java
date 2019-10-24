@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nathan22177.biddingclient.service.BiddingClientService;
 import com.nathan22177.biddingclient.utils.CollectorUtils;
-import com.nathan22177.collection.BiddingRound;
 import com.nathan22177.enums.Status;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.game.dto.StateDTO;
@@ -64,12 +63,12 @@ public class BiddingClientController {
         return ResponseEntity.ok(serverIsUp);
     }
 
-    @GetMapping("/menu")
+    @GetMapping("/")
     public String menu(Model model) {
         Boolean serverIsUp = service.isServerUp();
         model.addAttribute("serverIsUp", serverIsUp);
         model.addAttribute("bots", service.getAvailableOpponents());
         model.addAttribute("listOfGamesVersusBots", service.getStartedGamesVersusBots());
-        return "menu";
+        return "index";
     }
 }

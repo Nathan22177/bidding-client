@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nathan22177.bidder.BidderPlayer;
 import com.nathan22177.biddingclient.repository.VersusBotRepository;
-import com.nathan22177.collection.BiddingRound;
 import com.nathan22177.enums.Opponent;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.game.dto.GamesDTO;
@@ -42,11 +39,6 @@ public class BiddingClientService {
 
     @Autowired
     VersusBotRepository repository;
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
     public Map<String, Opponent> getAvailableOpponents() {
         return Opponent.botOptions.stream().collect(Collectors.toMap(Opponent::getName, Function.identity()));

@@ -20,6 +20,28 @@
             src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript" th:inline="javascript">
         require(['jquery'], function ($) {
+            function placeBid() {
+                var bid = $("#bid").val();
+                var mapping = '/vs_bot/' + [[${gameId}]] + '/' + bid;
+                $.get(mapping, function (data) {
+                    if (data) {
+                        $("#balance").val(data.balance);
+                        $("#acquiredAmount").val(data.acquiredAmount);
+                        $("#bid").empty();
+                        var lastOwn = data.round.ownBid;
+                        var lastOpponents = data.round.opponentBid;
+                        var won = lastOwn > lastOpponents;
+                        var entry = "<p>Your bid: " + lastOwn + "    Opponents bid: " + lastOpponents + "</p>";
+                        $("#bid").append(entry);
+
+                    }
+                });
+            }
+
+            $("#bidBtn").click(function () {
+                placeBid();
+            });
+
             $(document).ready(function () {
                 var upperLimit = [[${blue.balance}]];
                 $(".mask").inputmask('numeric', {rightAlign: false, min: 0, max: upperLimit});
@@ -58,8 +80,8 @@
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Inventory</h2>
-                <p th:text="${'Balance: ' + blue.balance}"></p>
-                <p th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
+                <p th:id="balance" th:text="${'Balance: ' + blue.balance}"></p>
+                <p th:id="acquiredAmount" th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h4 class="display-4">Initial conditions: </h4>
@@ -71,7 +93,11 @@
         <div class="input-group">
             <input style="margin-right: 10px" class="mask form-control form-control-lg col-sm-2" placeholder="Your bid"
                    th:type="text" id="bid">
-            <button class="btn btn-info">Place &nbsp;<i class="fas fa-money-bill-wave"></i></button>
+            <button id="bidBtn" class="btn btn-info">Place &nbsp;<i class="fas fa-money-bill-wave"></i></button>
+        </div>
+        <div class="col-sm-5 col-xs-5">
+            <h4 class="display-4">History</h4>
+            <p th:id="history"></p>
         </div>
     </div>
 </div>

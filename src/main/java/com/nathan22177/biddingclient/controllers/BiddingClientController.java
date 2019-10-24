@@ -40,11 +40,12 @@ public class BiddingClientController {
         PlayerVersusBotGame game = service.loadVersusBotGame(gameId);
         model.addAttribute("red", game.getRedPlayer());
         model.addAttribute("blue", game.getBluePlayer());
+        model.addAttribute("gameId", game.getId());
         model.addAttribute("playerCanPlaceBids",game.getStatus() == Status.WAITING_FOR_BIDS);
         return "vs_bot_interface";
     }
 
-    @PostMapping("/vs_bot/{gameId}/{bid}")
+    @GetMapping("/vs_bot/{gameId}/{bid}")
     public StateDTO placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
         return service.placeBidVersusBot(gameId, bid);
     }

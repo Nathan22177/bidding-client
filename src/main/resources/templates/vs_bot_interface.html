@@ -22,6 +22,48 @@
         var upperLimit = [[${blue.balance}]];
 
         require(['jquery'], function ($) {
+            function checkIfGameHasEnded(data) {
+                if (!data.status.isActive) {
+                    switch (data.status) {
+                        case 'BLUE_WON':
+                            window.alert('VICTORY! \n' +
+                                '\nAcquired ' + data.acquiredAmount +
+                                'QUs out of ' + [[${blue.conditions.quantity}]] + '\n' +
+                                'Cash left: ' + data.balance + '\n' +
+                                '\nOpponent lost with ' + data.opponentAcquiredAmount + ' QUs and ' +
+                                data.opponentBalance + ' cash.' +
+                                '\n\nYou will now be redirected to the menu.');
+                            window.location.replace('/');
+                            break;
+                        case 'RED_WON':
+                            window.alert('DEFEAT! \n' +
+                                '\nAcquired ' + data.acquiredAmount +
+                                'QUs out of ' + [[${blue.conditions.quantity}]] + '\n' +
+                                'Cash left: ' + data.balnce + '\n' +
+                                '\nOpponent won with ' + data.opponentAcquiredAmount + ' QUs and ' +
+                                data.opponentBalance + ' cash.' +
+                                '\n\nYou will now be redirected to the menu.');
+                            window.location.replace('/');
+                            break;
+                        case 'DRAW':
+                            window.alert('DRAW! \n' +
+                                '\nBoth acquired ' + data.acquiredAmount +
+                                'QUs out of ' + [[${blue.conditions.quantity}]] + '\n' +
+                                'Both left with ' + data.balnce + ' of cash.' +
+                            '\nYou will now be redirected to the menu.');
+                            window.location.replace('/');
+                            break;
+                        case 'ENDED_PREMATURELY':
+                            window.alert('Something went wrong. \n\nYou will now be redirected to the menu.');
+                            window.location.replace('/');
+                            break;
+                        case 'MATCHMAKING':
+                            window.alert('Waiting for another player.');
+                            break;
+                    }
+                }
+            }
+
             function placeBid() {
                 var bid =  parseInt($("#bid").val(), 10);
                 var balance =  parseInt($("#balance").text(), 10);
@@ -48,6 +90,7 @@
                         var entry = "<p>Your bid: " + lastOwn + "    Opponents bid: " + lastOpponents + "</p>";
                         $("#history").append(entry);
                         $("#bid").val(0);
+                        checkIfGameHasEnded(data)
                     }
                 });
             }

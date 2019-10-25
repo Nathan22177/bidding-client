@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nathan22177.biddingclient.service.BiddingClientService;
 import com.nathan22177.biddingclient.utils.CollectorUtils;
@@ -46,6 +47,7 @@ public class BiddingClientController {
     }
 
     @GetMapping("/vs_bot/{gameId}/{bid}")
+    @ResponseBody
     public StateDTO placeBidVersusBot(@PathVariable Long gameId, @PathVariable Integer bid) {
         return service.placeBidVersusBot(gameId, bid);
     }

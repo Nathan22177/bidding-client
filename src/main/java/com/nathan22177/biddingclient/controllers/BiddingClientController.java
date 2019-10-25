@@ -70,7 +70,7 @@ public class BiddingClientController {
 
     @GetMapping("/")
     public String menu(Model model) {
-        Boolean serverIsUp = service.isServerUp();
+        boolean serverIsUp = service.isServerUp();
         model.addAttribute("serverIsUp", serverIsUp);
         model.addAttribute("bots", service.getAvailableOpponents());
         model.addAttribute("listOfGamesVersusBots", service.getStartedGamesVersusBots());

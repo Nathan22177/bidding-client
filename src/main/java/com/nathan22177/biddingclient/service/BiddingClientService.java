@@ -54,13 +54,13 @@ public class BiddingClientService {
 
     public boolean isServerUp() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/check_if_server_is_up");
-        Boolean serverIsUp;
+        boolean serverIsUp;
         try {
             ResponseEntity response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null, String.class);
             serverIsUp = response.getStatusCode().is2xxSuccessful();
         } catch (RestClientException exception) {
             log.error("The server is down: " + exception);
-            serverIsUp = Boolean.FALSE;
+            serverIsUp = false;
         }
         return serverIsUp;
     }

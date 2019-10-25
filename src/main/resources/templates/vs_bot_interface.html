@@ -25,14 +25,14 @@
                 var mapping = '/vs_bot/' + [[${gameId}]] + '/' + bid;
                 $.get(mapping, function (data) {
                     if (data) {
-                        $("#balance").val(data.balance);
-                        $("#acquiredAmount").val(data.acquiredAmount);
-                        $("#bid").empty();
-                        var lastOwn = data.round.ownBid;
-                        var lastOpponents = data.round.opponentBid;
+                        $("#balance").text('Balance: ' + data.balance);
+                        $("#acquiredAmount").text('Acquired QU: ' + data.acquiredAmount);
+                        $("#bid").val('');
+                        var lastOwn = data.biddingRound.ownBid;
+                        var lastOpponents = data.biddingRound.opponentBid;
                         var won = lastOwn > lastOpponents;
                         var entry = "<p>Your bid: " + lastOwn + "    Opponents bid: " + lastOpponents + "</p>";
-                        $("#bid").append(entry);
+                        $("#history").append(entry);
 
                     }
                 });
@@ -80,8 +80,8 @@
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Inventory</h2>
-                <p th:id="balance" th:text="${'Balance: ' + blue.balance}"></p>
-                <p th:id="acquiredAmount" th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
+                <p id="balance" th:text="${'Balance: ' + blue.balance}"></p>
+                <p id="acquiredAmount" th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h4 class="display-4">Initial conditions: </h4>

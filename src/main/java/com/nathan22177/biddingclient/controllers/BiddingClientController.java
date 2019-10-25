@@ -42,6 +42,7 @@ public class BiddingClientController {
         model.addAttribute("red", game.getRedPlayer());
         model.addAttribute("blue", game.getBluePlayer());
         model.addAttribute("gameId", game.getId());
+        model.addAttribute("history", game.getBluePlayer().getBiddingHistory());
         model.addAttribute("playerCanPlaceBids",game.getStatus() == Status.WAITING_FOR_BIDS);
         return "vs_bot_interface";
     }

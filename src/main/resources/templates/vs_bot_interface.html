@@ -19,21 +19,35 @@
     <script type='text/javascript'
             src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript" th:inline="javascript">
+        var upperLimit = [[${blue.balance}]];
+
         require(['jquery'], function ($) {
             function placeBid() {
-                var bid = $("#bid").val();
+                var bid =  parseInt($("#bid").val(), 10);
+                var balance =  parseInt($("#balance").text(), 10);
+                if (bid > balance) {
+                    window.alert("You can't bet more money than you possess");
+                    upperLimit = balance;
+                    $("#bid").val(0);
+                    return;
+                }
+                if (bid < 0) {
+                    window.alert("Bid must be positive number");
+                    $("#bid").val(0);
+                    return;
+                }
                 var mapping = '/vs_bot/' + [[${gameId}]] + '/' + bid;
                 $.get(mapping, function (data) {
                     if (data) {
-                        $("#balance").text('Balance: ' + data.balance);
-                        $("#acquiredAmount").text('Acquired QU: ' + data.acquiredAmount);
+                        $("#balance").text(data.balance);
+                        $("#acquiredAmount").text(data.acquiredAmount);
                         $("#bid").val('');
                         var lastOwn = data.biddingRound.ownBid;
                         var lastOpponents = data.biddingRound.opponentBid;
                         var won = lastOwn > lastOpponents;
                         var entry = "<p>Your bid: " + lastOwn + "    Opponents bid: " + lastOpponents + "</p>";
                         $("#history").append(entry);
-
+                        $("#bid").val(0);
                     }
                 });
             }
@@ -43,7 +57,7 @@
             });
 
             $(document).ready(function () {
-                var upperLimit = [[${blue.balance}]];
+                $("#bid").val(0);
                 $(".mask").inputmask('numeric', {rightAlign: false, min: 0, max: upperLimit});
             });
         });
@@ -80,13 +94,13 @@
             </div>
             <div class="col-sm-5 col-xs-5">
                 <h2 class="display-4">Inventory</h2>
-                <p id="balance" th:text="${'Balance: ' + blue.balance}"></p>
-                <p id="acquiredAmount" th:text="${'Acquired QU: ' + blue.acquiredAmount}"></p>
+                <span>Balance: &nbsp;<p id="balance" th:text="${blue.balance}"></p></span>
+                <span>Acquired QU: &nbsp;<p id="acquiredAmount" th:text="${blue.acquiredAmount}"></p></span>
             </div>
             <div class="col-sm-5 col-xs-5">
-                <h4 class="display-4">Initial conditions: </h4>
-                <p th:text="${'Initial cash: ' + blue.conditions.cash}"></p>
-                <p th:text="${'Initial quantity: ' + blue.conditions.quantity}"></p>
+                <h4 class="display-4">Initial conditions </h4>
+                <span>Initial cash: &nbsp;<p th:text="${blue.conditions.cash}"></p></span>
+                <span>Initial quantity: &nbsp;<p th:text="${blue.conditions.quantity}"></p></span>
             </div>
         </div>
         <br>

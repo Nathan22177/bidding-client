@@ -146,10 +146,6 @@
             <div class="col-sm-3 col-xs-3">
                 <h2 class="display-4">Play</h2>
                 <div>
-                    <div>
-                        <button id="pvp" class="btn pvp" style="width: 200px; display: none"> vs. another player
-                            &nbsp;<i class="fa fa-user"></i></button>
-                    </div>
                     <p></p>
                     <div>
                         <button class="btn pve btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
@@ -183,12 +179,18 @@
                 </div>
             </div>
         </div>
-        <div>
-            <h2 class="display-4">Server status: <span id="status"></span>
-                <button class="btn" id="refreshBtn"><i class="fas fa-sync"></i>
-                </button>
-            </h2>
-            <i>* Server is required to be up in order to enable player vs. player</i>
+        <div class="row">
+            <div class="col-sm-7 col-xs-7">
+                <h2 class="display-4">Server status: <span id="status"></span>
+                    <button class="btn" id="refreshBtn"><i class="fas fa-sync"></i>
+                    </button>
+                </h2>
+                <i>* Server is required to be up in order to enable player vs. player</i>
+            </div>
+            <div class="col-sm-3 col-xs-3" style="padding-top: 20px">
+                <button id="pvp" class="btn pvp" style="width: 200px; display: none;"> vs. another player
+                    &nbsp;<i class="fa fa-user"></i></button>
+            </div>
         </div>
     </div>
 </div>

@@ -96,7 +96,7 @@
                             var lastOwn = data.biddingRound.ownBid;
                             var lastOpponents = data.biddingRound.opponentBid;
                             var won = lastOwn > lastOpponents;
-                            var entry = "<p>Your bid: " + lastOwn + "    Opponents bid: " + lastOpponents + "</p>";
+                            var entry = "<p>Your bid: " + lastOwn + "&nbsp; Opponents bid: " + lastOpponents + "</p>";
                             $("#history").append(entry);
                         }
                         $("#bid").val(0);
@@ -165,18 +165,18 @@
             <div class="col-sm-3">
                 <h2 class="display-4">Inventory</h2>
                 <span>Balance: &nbsp;<p class="inline" id="balance" th:text="${blue.balance}"></p></span>
-                <span>&nbsp;&nbsp;&nbsp;Acquired QU: &nbsp;<p class="inline" id="acquiredAmount"
+                <span>&nbsp;&nbsp;Acquired QU: &nbsp;<p class="inline" id="acquiredAmount"
                                                               th:text="${blue.acquiredAmount}"></p></span>
                 <h2 class="display-4">Conditions</h2>
                 <span>Start balance: &nbsp;<p class="inline" th:text="${blue.conditions.cash}"></p></span>
 
-                <span>&nbsp;&nbsp;&nbsp;Overall quantity: <p class="inline"
+                <span>&nbsp;&nbsp;Overall quantity: <p class="inline"
                                                              th:text="${blue.conditions.quantity}"></p></span>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <h4 class="display-4">History</h4>
                 <th:block th:if="${history != null}" th:each="bid: ${history}">
-                    <p th:text="'Your bid: ' + ${bid.ownBid} + '    Opponents bid: ' + ${bid.opponentBid}"></p>
+                    <p class="inline" th:text="'Your bid: ' + ${bid.ownBid} + '&nbsp; Opponents bid: ' + ${bid.opponentBid}"></p>
                 </th:block>
                 <p th:id="history"></p>
             </div>

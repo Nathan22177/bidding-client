@@ -73,10 +73,23 @@
             margin-bottom: -500px;
         }
 
-        .start {
-            background: #11998e;
-            background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
-            background: linear-gradient(to right, #11998e, #38ef7d);
+        .pve {
+            background: #000428;
+            background: -webkit-linear-gradient(to right, #000428, #004e92);
+            background: linear-gradient(to right, #000428, #004e92);
+        }
+
+        .pvp {
+
+            background: #b92b27;
+            background: -webkit-linear-gradient(to right, #b92b27, #1565c0);
+            background: linear-gradient(to right, #b92b27, #1565c0);
+        }
+
+        .load {
+            background: #2c3e50;
+            background: -webkit-linear-gradient(to right, #2c3e50, #4ca1af);
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
         }
 
         .learn-more {
@@ -134,12 +147,12 @@
                 <h2 class="display-4">Play</h2>
                 <div>
                     <div>
-                        <button id="pvp" class="btn start" style="width: 200px; display: none"> vs. another player
+                        <button id="pvp" class="btn pvp" style="width: 200px; display: none"> vs. another player
                             &nbsp;<i class="fa fa-user"></i></button>
                     </div>
                     <p></p>
                     <div>
-                        <button class="btn start btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
+                        <button class="btn pve btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
                                 type="button" style="width: 200px"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
@@ -154,13 +167,14 @@
                                th:text="${bot.value.title}"></a>
                         </div>
                     </div>
+                    <p></p>
                     <div>
-                        <button class="btn start btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
+                        <button class="btn load btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
                                 type="button" style="width: 200px"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">load game &nbsp;<i class="fas fa-robot"></i>
                         </button>
-                        <div class="dropdown-menu" style="width: 600px" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" style="width: 600px" aria-labelledby="dropdownMenuButton2">
                             <a class="dropdown-item" th:each="game : ${listOfGamesVersusBots}"
                                th:href="${'vs_bot/' + game.id}"
                                th:text="${'vs. ' + game.opponent + '; id: ' + game.id + '; rounds.left: ' + game.roundsLeft}"></a>

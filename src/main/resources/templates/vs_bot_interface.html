@@ -21,6 +21,15 @@
         var upperLimit = [[${blue.balance}]];
 
         require(['jquery'], function ($) {
+            function resolveRoundsCountdown(data) {
+                var color;
+                if (data.roundsLeft > 2) {
+                    color = 'green';
+                } else {
+                    color = 'red';
+                }
+                $("#roundsLeft").css('color', color).text(data.roundsLeft);
+            }
             function checkIfGameHasEnded(data) {
                 if (!data.status.isActive) {
                     switch (data.status) {
@@ -91,7 +100,8 @@
                             $("#history").append(entry);
                         }
                         $("#bid").val(0);
-                        checkIfGameHasEnded(data)
+                        resolveRoundsCountdown(data);
+                        checkIfGameHasEnded(data);
                     }
                 });
             }
@@ -103,6 +113,7 @@
             $(document).ready(function () {
                 $("#bid").val(0);
                 $(".mask").inputmask('numeric', {rightAlign: false, min: 0, max: upperLimit});
+                resolveRoundsCountdown([[${state}]]);
             });
         });
     </script>
@@ -110,8 +121,6 @@
         .btn {
             border: none;
             color: white;
-            padding-top: 12px;
-            padding-bottom: 12px;
             font-size: 16px;
             cursor: pointer;
         }
@@ -134,38 +143,51 @@
             height: 100vh;
             margin-bottom: -500px;
         }
+
+        .place {
+            background: #11998e;
+            background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
+            background: linear-gradient(to right, #11998e, #38ef7d);
+        }
+
+        .inline {
+            display: inline;
+        }
     </style>
 </head>
 <body>
 <div class="jumbotron">
     <div class="container">
+        <h1 class="display-3"><p th:text="${'Playing against ' + red.title}"></p></h1>
+        <p class="lead">Try to win as much QU as possible. But be careful! If you overspend the opponent might gain an
+            upper hand on what's left. So don't run out of money!</p>
         <div class="row">
-            <h1 class="display-3"><p th:text="${'Playing against ' + red.title}"></p></h1>
-            <div class="col-sm-1 col-xs-1">
-            </div>
-            <div class="col-sm-5 col-xs-5">
+            <div class="col-sm-3">
                 <h2 class="display-4">Inventory</h2>
-                <span>Balance: &nbsp;<p id="balance" th:text="${blue.balance}"></p></span>
-                <span>Acquired QU: &nbsp;<p id="acquiredAmount" th:text="${blue.acquiredAmount}"></p></span>
+                <span>Balance: &nbsp;<p class="inline" id="balance" th:text="${blue.balance}"></p></span>
+                <span>&nbsp;&nbsp;&nbsp;Acquired QU: &nbsp;<p class="inline" id="acquiredAmount"
+                                                              th:text="${blue.acquiredAmount}"></p></span>
+                <h2 class="display-4">Conditions</h2>
+                <span>Start balance: &nbsp;<p class="inline" th:text="${blue.conditions.cash}"></p></span>
+
+                <span>&nbsp;&nbsp;&nbsp;Overall quantity: <p class="inline"
+                                                             th:text="${blue.conditions.quantity}"></p></span>
             </div>
-            <div class="col-sm-5 col-xs-5">
-                <h4 class="display-4">Initial conditions </h4>
-                <span>Initial cash: &nbsp;<p th:text="${blue.conditions.cash}"></p></span>
-                <span>Initial quantity: &nbsp;<p th:text="${blue.conditions.quantity}"></p></span>
+            <div class="col-sm-3">
+                <h4 class="display-4">History</h4>
+                <th:block th:if="${history != null}" th:each="bid: ${history}">
+                    <p th:text="'Your bid: ' + ${bid.ownBid} + '    Opponents bid: ' + ${bid.opponentBid}"></p>
+                </th:block>
+                <p th:id="history"></p>
             </div>
-        </div>
-        <br>
-        <div class="input-group">
-            <input style="margin-right: 10px" class="mask form-control form-control-lg col-sm-2" placeholder="Your bid"
-                   th:type="text" id="bid">
-            <button id="bidBtn" class="btn btn-info">Place &nbsp;<i class="fas fa-money-bill-wave"></i></button>
-        </div>
-        <div class="col-sm-5 col-xs-5">
-            <h4 class="display-4">History</h4>
-            <th:block th:if="${history != null}" th:each="bid: ${history}">
-                <p th:text="'Your bid: ' + ${bid.ownBid} + '    Opponents bid: ' + ${bid.opponentBid}"></p>
-            </th:block>
-            <p th:id="history"></p>
+            <div class="col-sm-4">
+                <h4 class="display-4">Rounds left:<p class="inline" style="color: green" th:id="roundsLeft"></p></h4>
+                <input class="mask form-control form-control-lg"
+                       placeholder="Your bid"
+                       th:type="text" id="bid">
+                <button id="bidBtn" style="margin-top: 8px; width: 100%" class="btn place">Place &nbsp;<i
+                        class="fas fa-money-bill-wave"></i></button>
+            </div>
         </div>
     </div>
 </div>

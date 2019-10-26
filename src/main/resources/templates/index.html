@@ -153,6 +153,16 @@
                                th:href="${'play_vs_bot/' + bot.key}"
                                th:text="${bot.value.title}"></a>
                         </div>
+                        <button class="btn start btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
+                                type="button" style="width: 200px"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">load game &nbsp;<i class="fas fa-robot"></i>
+                        </button>
+                        <div class="dropdown-menu" style="width: 600px" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" th:each="game : ${listOfGamesVersusBots}"
+                               th:href="${'vs_bot/' + game.id}"
+                               th:text="${'vs. ' + game.opponent + '; id: ' + game.id + '; rounds.left: ' + game.roundsLeft}"></a>
+                        </div>
                     </div>
                 </div>
             </div>

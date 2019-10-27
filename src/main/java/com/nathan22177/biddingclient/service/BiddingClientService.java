@@ -77,6 +77,6 @@ public class BiddingClientService {
     }
 
     public List<GamesDTO> getStartedGamesVersusBots() {
-        return repository.findAll().stream().map(GamesDTO::new).collect(Collectors.toList());
+        return repository.findAll().stream().filter(game -> game.getStatus().isActive()).map(GamesDTO::new).collect(Collectors.toList());
     }
 }

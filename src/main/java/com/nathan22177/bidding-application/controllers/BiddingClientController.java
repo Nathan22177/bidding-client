@@ -6,12 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nathan22177.biddingclient.service.BiddingClientService;
 import com.nathan22177.biddingclient.utils.CollectorUtils;
-import com.nathan22177.enums.Status;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.game.dto.StateDTO;
 

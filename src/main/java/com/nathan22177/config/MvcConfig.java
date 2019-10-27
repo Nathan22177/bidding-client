@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.config;
+package com.nathan22177.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.controllers;
+package com.nathan22177.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nathan22177.biddingclient.service.BiddingClientService;
-import com.nathan22177.biddingclient.utils.CollectorUtils;
+import com.nathan22177.service.BiddingClientService;
+import com.nathan22177.utils.CollectorUtils;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.game.dto.StateDTO;
 

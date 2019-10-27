@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.service;
+package com.nathan22177.service;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nathan22177.biddingclient.repository.VersusBotRepository;
+import com.nathan22177.repository.VersusBotRepository;
 import com.nathan22177.enums.Opponent;
 import com.nathan22177.game.PlayerVersusBotGame;
 import com.nathan22177.game.dto.GamesDTO;

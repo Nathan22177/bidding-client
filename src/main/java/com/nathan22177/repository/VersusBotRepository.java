@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.repository;
+package com.nathan22177.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

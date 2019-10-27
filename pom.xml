@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.nathan22177</groupId>
-    <artifactId>bidding-client</artifactId>
+    <artifactId>bidding-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bidding-client</name>
+    <name>bidding-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -64,7 +64,7 @@
         </dependency>
         <dependency>
             <groupId>com.nathan22177</groupId>
-            <artifactId>bidding-common</artifactId>
+            <artifactId>bidding-engine</artifactId>
             <version>0.0.37-SNAPSHOT</version>
         </dependency>
         <dependency>

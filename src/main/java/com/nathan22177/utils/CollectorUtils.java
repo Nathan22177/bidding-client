@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.utils;
+package com.nathan22177.utils;
 
 import java.util.Collections;
 import java.util.stream.Collector;

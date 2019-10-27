@@ -1,4 +1,4 @@
-package com.nathan22177.biddingclient.controllers;
+package com.nathan22177.controllers;
 
 import org.springframework.stereotype.Component;
 

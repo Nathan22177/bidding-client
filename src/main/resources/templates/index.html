@@ -16,31 +16,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
         require(["jquery"], function ($) {
-            function sendAjaxRequestForServerStatus() {
-                $.get('check_if_server_is_up', function (data) {
-                    if (data) {
-                        $("#pvp").show();
-                        var online = "<span style=\"color: green\">" + "online" + "</span>";
-                        $("#status").empty();
-                        $("#status").append(online)
-                        $("#refreshBtn").removeClass("btn-danger btn-success");
-                        $("#refreshBtn").addClass("btn-success");
-                    } else {
-                        $("#pvp").hide();
-                        var offline = "<span style=\"color: red\">" + "offline" + "</span>";
-                        $("#status").empty();
-                        $("#status").append(offline)
-                        $("#refreshBtn").removeClass("btn-danger btn-success");
-                        $("#refreshBtn").addClass("btn-danger");
-                    }
-                });
-            };
 
             $(document).ready(function () {
-                sendAjaxRequestForServerStatus();
-                $("#refreshBtn").click(function () {
-                    sendAjaxRequestForServerStatus();
-                });
             });
         });
     </script>
@@ -74,19 +51,21 @@
         }
 
         .pve {
+            width: 200px;
             background: #000428;
             background: -webkit-linear-gradient(to right, #000428, #004e92);
             background: linear-gradient(to right, #000428, #004e92);
         }
 
         .pvp {
-
+            width: 200px;
             background: #b92b27;
             background: -webkit-linear-gradient(to right, #b92b27, #1565c0);
             background: linear-gradient(to right, #b92b27, #1565c0);
         }
 
         .load {
+            width: 200px;
             background: #2c3e50;
             background: -webkit-linear-gradient(to right, #2c3e50, #4ca1af);
             background: linear-gradient(to right, #2c3e50, #4ca1af);
@@ -148,6 +127,11 @@
                 <div>
                     <p></p>
                     <div>
+                        <button id="pvp" class="btn pvp"> vs. another player
+                            &nbsp;<i class="fa fa-user"></i></button>
+                    </div>
+                    <p></p>
+                    <div>
                         <button class="btn pve btn-secondary dropdown-toggle btn-secondary dropdown-toggle"
                                 type="button" style="width: 200px"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -177,19 +161,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-7 col-xs-7">
-                <h2 class="display-4">Server status: <span id="status"></span>
-                    <button class="btn" id="refreshBtn"><i class="fas fa-sync"></i>
-                    </button>
-                </h2>
-                <i>* Server is required to be up in order to enable player vs. player</i>
-            </div>
-            <div class="col-sm-3 col-xs-3" style="padding-top: 20px">
-                <button id="pvp" class="btn pvp" style="width: 200px; display: none;"> vs. another player
-                    &nbsp;<i class="fa fa-user"></i></button>
             </div>
         </div>
     </div>
